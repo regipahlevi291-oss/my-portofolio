@@ -12,8 +12,25 @@ export default function Contact() {
         setIsSubmitting(true);
 
         const formData = new FormData(e.currentTarget);
+        const name = formData.get('name') as string;
+        const message = formData.get('message') as string;
 
-        // URL Endpoint Formspree kamu sudah dipasang di sini:
+        // 1. Simpan pesan ke LocalStorage agar muncul di halaman SURAT
+        const newEntry = {
+            id: Date.now().toString(),
+            name: name,
+            message: message,
+            date: new Date().toLocaleDateString('id-ID', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+            })
+        };
+
+        const existingMessages = JSON.parse(localStorage.getItem('guestbook_messages') || '[]');
+        localStorage.setItem('guestbook_messages', JSON.stringify([newEntry, ...existingMessages]));
+
+        // 2. Kirim email notifikasi melalui Formspree
         const response = await fetch('https://formspree.io/f/meaovzep', {
             method: 'POST',
             body: formData,
@@ -28,7 +45,9 @@ export default function Contact() {
             setIsSent(true);
             (e.target as HTMLFormElement).reset();
         } else {
-            alert('Gagal mengirim pesan. Silakan coba lagi.');
+            alert('Gagal mengirim pesan ke Formspree, tetapi pesan Anda tetap tersimpan di halaman Surat.');
+            setIsSent(true);
+            (e.target as HTMLFormElement).reset();
         }
     };
 
@@ -133,7 +152,7 @@ export default function Contact() {
                         animate={{ opacity: 1, y: 0 }}
                         className="text-green-500 text-center font-medium text-sm mt-2"
                     >
-                        Pesan Anda berhasil dikirim! Terima kasih.
+                        Pesan Anda berhasil dikirim dan tersimpan di halaman Surat!
                     </motion.p>
                 )}
             </motion.form>
