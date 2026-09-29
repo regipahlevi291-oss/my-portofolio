@@ -39,19 +39,19 @@ export default function Projects() {
         },
         {
             id: 5,
-            title: 'Aplikasi Web Portofolio',
-            description: 'Website portofolio pribadi responsif dibangun dengan Next.js dan Tailwind CSS.',
-            image: '/profileabout.png',
-            tags: ['Next.js', 'React', 'Tailwind CSS'],
+            title: 'Strip Frame',
+            description: 'Strip Frame PhotoBooth',
+            image: '/spiderman.jpg',
+            tags: ['Canva'],
             status: 'Completed',
         },
         {
             id: 6,
-            title: 'Sistem Manajemen Data',
-            description: 'Pengembangan backend dan REST API menggunakan Laravel dan MySQL.',
-            image: '/klien.jpg',
-            tags: ['Laravel', 'PHP', 'MySQL'],
-            status: 'In Progress',
+            title: 'Strip Frame',
+            description: 'Strip Frame PhotoBooth',
+            image: '/gwen.jpg',
+            tags: ['Canva'],
+            status: 'Completed',
         },
     ];
 

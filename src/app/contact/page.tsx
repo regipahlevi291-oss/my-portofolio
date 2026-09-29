@@ -1,15 +1,37 @@
 'use client';
 
-import { FormEvent } from 'react';
-import { motion, Variants } from 'framer-motion'; // 1. Tambahkan impor `Variants`
+import { FormEvent, useState } from 'react';
+import { motion, Variants } from 'framer-motion';
 
 export default function Contact() {
-    const handleSubmit = (e: FormEvent) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSent, setIsSent] = useState(false);
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        alert('Pesan Anda berhasil dikirim!');
+        setIsSubmitting(true);
+
+        const formData = new FormData(e.currentTarget);
+
+        // URL Endpoint Formspree kamu sudah dipasang di sini:
+        const response = await fetch('https://formspree.io/f/meaovzep', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        setIsSubmitting(false);
+
+        if (response.ok) {
+            setIsSent(true);
+            (e.target as HTMLFormElement).reset();
+        } else {
+            alert('Gagal mengirim pesan. Silakan coba lagi.');
+        }
     };
 
-    // 2. Berikan tipe `: Variants` secara eksplisit pada kodenya
     const containerVariants: Variants = {
         hidden: { opacity: 0, y: 30 },
         visible: {
@@ -34,7 +56,7 @@ export default function Contact() {
 
     return (
         <section className="min-h-screen py-16 px-6 md:px-20 max-w-3xl mx-auto flex flex-col justify-center">
-            {/* Header Section dengan Animasi */}
+            {/* Header Section */}
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -47,7 +69,7 @@ export default function Contact() {
                 </p>
             </motion.div>
 
-            {/* Form Container dengan Animasi Parent */}
+            {/* Form Container */}
             <motion.form
                 variants={containerVariants}
                 initial="hidden"
@@ -60,6 +82,7 @@ export default function Contact() {
                     <label className="block text-sm font-medium mb-2">1. Nama Pengirim</label>
                     <input
                         type="text"
+                        name="name"
                         required
                         placeholder="Masukkan nama Anda"
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-zinc-700 focus:ring-2 focus:ring-blue-600 outline-none dark:bg-zinc-800 transition-all duration-200"
@@ -71,6 +94,7 @@ export default function Contact() {
                     <label className="block text-sm font-medium mb-2">2. Email Pengirim</label>
                     <input
                         type="email"
+                        name="email"
                         required
                         placeholder="nama@email.com"
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-zinc-700 focus:ring-2 focus:ring-blue-600 outline-none dark:bg-zinc-800 transition-all duration-200"
@@ -82,6 +106,7 @@ export default function Contact() {
                     <label className="block text-sm font-medium mb-2">3. Pesan yang Akan Disampaikan</label>
                     <textarea
                         rows={5}
+                        name="message"
                         required
                         placeholder="Tuliskan pesan Anda di sini..."
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-zinc-700 focus:ring-2 focus:ring-blue-600 outline-none dark:bg-zinc-800 transition-all duration-200"
@@ -94,11 +119,23 @@ export default function Contact() {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         type="submit"
-                        className="w-full py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition duration-300 shadow-md cursor-pointer"
+                        disabled={isSubmitting}
+                        className="w-full py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition duration-300 shadow-md cursor-pointer disabled:opacity-50"
                     >
-                        Kirim Pesan
+                        {isSubmitting ? 'Mengirim...' : 'Kirim Pesan'}
                     </motion.button>
                 </motion.div>
+
+                {/* Notifikasi Berhasil */}
+                {isSent && (
+                    <motion.p
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-green-500 text-center font-medium text-sm mt-2"
+                    >
+                        Pesan Anda berhasil dikirim! Terima kasih.
+                    </motion.p>
+                )}
             </motion.form>
         </section>
     );
