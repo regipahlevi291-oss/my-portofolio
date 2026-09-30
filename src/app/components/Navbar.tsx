@@ -14,8 +14,6 @@ export default function Navbar() {
         { name: 'Contact', path: '/contact' },
     ];
 
-    const isSuratActive = pathname === '/surat';
-
     return (
         <header className="fixed top-4 left-0 right-0 z-50 px-4 max-w-5xl mx-auto">
             <nav className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-gray-200 dark:border-zinc-800 rounded-full px-6 py-2.5 grid grid-cols-3 items-center shadow-lg shadow-black/5 transition-colors duration-300">
@@ -32,7 +30,7 @@ export default function Navbar() {
                     </Link>
                 </div>
 
-                {/* 2. TENGAH: Menu Navigasi Utama */}
+                {/* 2. TENGAH: Menu Navigasi (Presisi di Tengah Layar) */}
                 <div className="flex items-center justify-center gap-4 sm:gap-6 md:gap-8">
                     {navItems.map((item) => {
                         const isActive = pathname === item.path;
@@ -52,18 +50,8 @@ export default function Navbar() {
                     })}
                 </div>
 
-                {/* 3. KANAN: Menu Surat */}
+                {/* 3. KANAN: Penyeimbang Tata Letak */}
                 <div className="flex items-center justify-end">
-                    <Link
-                        href="/surat"
-                        className={`text-xs md:text-sm font-semibold tracking-wide uppercase transition-all duration-200 hover:text-blue-600 dark:hover:text-blue-400 ${
-                            isSuratActive
-                                ? 'text-blue-600 dark:text-blue-400 font-bold'
-                                : 'text-gray-600 dark:text-gray-300'
-                        }`}
-                    >
-                        Surat ✉️
-                    </Link>
                 </div>
 
             </nav>
