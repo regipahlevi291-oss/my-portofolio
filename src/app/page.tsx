@@ -11,11 +11,11 @@ function IntroAnimation({ onComplete }: { onComplete: () => void }) {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    const timer1 = setTimeout(() => setStep(1), 800);  // Menampilkan "HELLO!"
-    const timer2 = setTimeout(() => setStep(2), 2000); // Menampilkan "I'm Regii"
-    const timer3 = setTimeout(() => setStep(3), 3200); // Menampilkan "This is my PORTFOLIO"
+    const timer1 = setTimeout(() => setStep(1), 800);
+    const timer2 = setTimeout(() => setStep(2), 2000);
+    const timer3 = setTimeout(() => setStep(3), 3200);
     const timer4 = setTimeout(() => {
-      onComplete(); // Selesai animasi intro
+      onComplete();
     }, 4600);
 
     return () => {
@@ -32,7 +32,6 @@ function IntroAnimation({ onComplete }: { onComplete: () => void }) {
       exit={{ y: '-100%', transition: { duration: 0.8, ease: 'easeInOut' } }}
       className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950 text-white overflow-hidden"
     >
-      {/* Animasi Lingkaran Membesar */}
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 50 }}
@@ -40,7 +39,6 @@ function IntroAnimation({ onComplete }: { onComplete: () => void }) {
         className="absolute w-12 h-12 rounded-full bg-zinc-900 -z-10"
       />
 
-      {/* Teks Animasi */}
       <div className="text-center px-4">
         <AnimatePresence mode="wait">
           {step === 1 && (
@@ -115,8 +113,96 @@ export default function Home() {
     },
   ];
 
+  // Daftar Ikon Teknologi dengan Figma
+  const techIcons = [
+    {
+      name: 'JavaScript',
+      icon: 'https://cdn.simpleicons.org/javascript/F7DF1E',
+      pos: 'top-0 right-8',
+      animate: {
+        x: [0, 20, -25, 15, 0],
+        y: [0, -30, 15, -20, 0],
+        rotate: [0, 25, -35, 20, 0],
+        scale: [1, 1.25, 0.85, 1.1, 1],
+      },
+      duration: 5,
+    },
+    {
+      name: 'HTML5',
+      icon: 'https://cdn.simpleicons.org/html5/E34F26',
+      pos: 'top-20 -right-6',
+      animate: {
+        x: [0, -30, 20, -15, 0],
+        y: [0, 25, -20, 30, 0],
+        rotate: [0, -40, 25, -20, 0],
+        scale: [1, 0.8, 1.3, 0.9, 1],
+      },
+      duration: 6.5,
+    },
+    {
+      name: 'Figma',
+      icon: 'https://cdn.simpleicons.org/figma/F24E1E',
+      pos: 'bottom-16 -right-4',
+      animate: {
+        x: [0, -22, 28, -15, 0],
+        y: [0, -25, 30, -15, 0],
+        rotate: [0, 50, -50, 20, 0],
+        scale: [1, 1.2, 0.75, 1.15, 1],
+      },
+      duration: 4.8,
+    },
+    {
+      name: 'React',
+      icon: 'https://cdn.simpleicons.org/react/61DAFB',
+      pos: 'bottom-0 left-10',
+      animate: {
+        x: [0, 25, -20, 30, 0],
+        y: [0, -20, 25, -30, 0],
+        rotate: [0, 360],
+        scale: [1, 1.35, 0.85, 1.2, 1],
+      },
+      duration: 7,
+    },
+    {
+      name: 'Python',
+      icon: 'https://cdn.simpleicons.org/python/3776AB',
+      pos: 'bottom-20 -left-8',
+      animate: {
+        x: [0, -25, 22, -30, 0],
+        y: [0, 28, -25, 18, 0],
+        rotate: [0, -25, 40, -20, 0],
+        scale: [1, 0.85, 1.3, 0.8, 1],
+      },
+      duration: 5.5,
+    },
+    {
+      name: 'Next.js',
+      icon: 'https://cdn.simpleicons.org/nextdotjs/ffffff',
+      pos: 'top-16 -left-8',
+      animate: {
+        x: [0, 30, -15, 20, 0],
+        y: [0, -22, 30, -25, 0],
+        rotate: [0, 30, -35, 15, 0],
+        scale: [1, 1.15, 0.85, 1.25, 1],
+      },
+      duration: 6.2,
+    },
+    {
+      name: 'Tailwind CSS',
+      icon: 'https://cdn.simpleicons.org/tailwindcss/06B6D4',
+      pos: '-top-6 left-1/2 -translate-x-1/2',
+      animate: {
+        x: [0, -20, 25, -30, 0],
+        y: [0, -25, 20, -15, 0],
+        rotate: [0, -22, 30, -18, 0],
+        scale: [1, 1.25, 0.8, 1.2, 1],
+      },
+      duration: 5.8,
+    },
+  ];
+
   return (
-    <main className="relative min-h-screen">
+    <main className="relative min-h-screen overflow-hidden">
       {/* Transisi Animasi Intro */}
       <AnimatePresence>
         {showIntro && (
@@ -130,7 +216,7 @@ export default function Home() {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: showIntro ? 0 : 1, x: showIntro ? -50 : 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="max-w-xl space-y-6"
+          className="max-w-xl space-y-6 z-10"
         >
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold leading-tight">
             Hi, I'm a <br />
@@ -160,7 +246,7 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Ikon Sosial Media Hitam Putih */}
+            {/* Ikon Sosial Media */}
             <div className="flex items-center gap-4 pt-2">
               {socialLinks.map((social) => (
                 <a
@@ -204,23 +290,51 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* ==================== FOTO DALAM LINGKARAN ==================== */}
+        {/* ==================== FOTO DENGAN WARNA BIRU SOFT & TERLIHAT JELAS ==================== */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: showIntro ? 0 : 1, scale: showIntro ? 0.8 : 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative w-80 h-80 md:w-96 md:h-96 flex items-center justify-center flex-shrink-0 mt-12 md:mt-0"
         >
-          {/* Lingkaran dengan Gambar di dalamnya */}
-          <div className="relative w-full h-full rounded-full border-[8px] border-blue-600 bg-zinc-900/50 shadow-2xl overflow-hidden">
+          {/* Cahaya Ambient Biru Soft (Tidak Terlalu Terang) */}
+          <div className="absolute inset-2 rounded-full bg-blue-600/20 blur-3xl animate-pulse" />
+
+          {/* Lingkaran Foto dengan Gradasi Biru Slate & Border Biru Elegan */}
+          <div className="relative w-60 h-60 md:w-72 md:h-72 rounded-full border-2 border-blue-500/70 bg-gradient-to-b from-blue-950 via-slate-900 to-zinc-950 shadow-[0_0_25px_rgba(37,99,235,0.35)] overflow-hidden z-10 flex items-center justify-center">
+            {/* Pendaran Cahaya Biru di Belakang Foto */}
+            <div className="absolute bottom-0 w-full h-3/4 bg-radial from-blue-600/25 to-transparent blur-md" />
+
             <Image
-              src="/egii.jpg"
+              src="/regi.jpg"
               alt="M. Regi Pahlevy De Pasha"
               fill
-              className="object-cover object-center scale-105"
+              className="object-cover object-center scale-105 relative z-10"
               priority
             />
           </div>
+
+          {/* Ikon-Ikon Teknologi Melayang */}
+          {techIcons.map((tech) => (
+            <motion.div
+              key={tech.name}
+              animate={tech.animate}
+              transition={{
+                duration: tech.duration,
+                repeat: Infinity,
+                repeatType: 'mirror',
+                ease: 'easeInOut',
+              }}
+              className={`absolute ${tech.pos} z-20 w-11 h-11 md:w-12 md:h-12 rounded-full bg-zinc-900/90 border border-blue-500/40 flex items-center justify-center p-2.5 shadow-[0_0_12px_rgba(59,130,246,0.25)] backdrop-blur-sm hover:scale-125 transition-transform cursor-pointer`}
+              title={tech.name}
+            >
+              <img
+                src={tech.icon}
+                alt={tech.name}
+                className="w-full h-full object-contain"
+              />
+            </motion.div>
+          ))}
         </motion.div>
       </section>
     </main>

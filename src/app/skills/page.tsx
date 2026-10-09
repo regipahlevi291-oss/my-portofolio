@@ -46,16 +46,11 @@ export default function Skills() {
     { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
     { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
     { name: 'PHP', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg' },
-    { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
     { name: 'Express.js', icon: 'https://cdn.simpleicons.org/express/000000/white' },
   ];
 
   const uiuxSkills = [
     { name: 'Figma', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' },
-    { name: 'Webflow', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webflow/webflow-original.svg' },
-    { name: 'Framer', icon: 'https://cdn.simpleicons.org/framer/0055FF' },
-    { name: 'Miro', icon: 'https://cdn.simpleicons.org/miro/050038/FFD02F' },
-    { name: 'Penpot', icon: 'https://cdn.simpleicons.org/penpot/000000/00E5A3' },
     { name: 'Canva', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg' },
   ];
 
